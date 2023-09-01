@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "9e7e0c6d-da26-412d-a7d2-9931c3e80570",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22933734",
+		"_collection_link": "https://www.postman.com/solar-firefly-310439/workspace/translation-task/collection/22933734-9e7e0c6d-da26-412d-a7d2-9931c3e80570?action=share&source=collection_link&creator=22933734"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"mahmoud\",\r\n    \"email\":\"mahmoudwardany77@gmail.com\",\r\n    \"password\":\"mo151294om\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://translation-w2bq.onrender.com/api/v1/user/register",
+					"protocol": "https",
+					"host": [
+						"translation-w2bq",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1haG1vdWQiLCJlbWFpbCI6Im1haG1vdWR3YXJkYW55NzdAZ21haWwuY29tIiwiaWQiOjMsImlhdCI6MTY5MzM1NDkwNn0.eGgzxryUx7WxqwKo-OJ9dKkMj8jxU7deXwYlTfnI8r0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"email\":\"mahmoudwardany18@gmail.com\",\r\n\"password\":\"mo151294om\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://translation-w2bq.onrender.com/api/v1/user/login",
+					"protocol": "https",
+					"host": [
+						"translation-w2bq",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"email\":\"mahmoudwardany18@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://translation-w2bq.onrender.com/api/v1/user/reset-password",
+					"protocol": "https",
+					"host": [
+						"translation-w2bq",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"reset-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Password",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"newPassword\":\"backend\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://translation-w2bq.onrender.com/api/v1/user/reset-password/5e54c406-8d38-46f0-9c5f-6e1799a17240",
+					"protocol": "https",
+					"host": [
+						"translation-w2bq",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"reset-password",
+						"5e54c406-8d38-46f0-9c5f-6e1799a17240"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "2302d50e-4021-41bd-b74d-6352e02d2bba",
+		"name": "Translate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22933734",
+		"_collection_link": "https://www.postman.com/solar-firefly-310439/workspace/translation-task/collection/22933734-2302d50e-4021-41bd-b74d-6352e02d2bba?action=share&source=collection_link&creator=22933734"
+	},
+	"item": [
+		{
+			"name": "Translatet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1haG1vdWQiLCJlbWFpbCI6Im1haG1vdWR3YXJkYW55MThAZ21haWwuY29tIiwiaWQiOjIsImlhdCI6MTY5MzQ5MTQ4Mn0.OthpMTRPaxZLQ8IHTperZmUuZsJV5i67lpA4qcR3uLY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-RapidAPI-Host",
+						"value": "google-translate1.p.rapidapi.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "application/gzip",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-RapidAPI-Key",
+						"value": "075a39ce8emshcd71328530f7612p18cbe3jsna71da3fc7f9f",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-RapidAPI-Key",
+						"value": "075a39ce8emshcd71328530f7612p18cbe3jsna71da3fc7f9f",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-RapidAPI-Host",
+						"value": "microsoft-translator-text.p.rapidapi.com",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\":\"hi\",\r\n    \"sourceLanguage\":\"en\",\r\n    \"targetLanguage\":\"ar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://translation-w2bq.onrender.com/api/v1/translation",
+					"protocol": "https",
+					"host": [
+						"translation-w2bq",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"translation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get history",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1haG1vdWQiLCJlbWFpbCI6Im1haG1vdWR3YXJkYW55MThAZ21haWwuY29tIiwiaWQiOjIsImlhdCI6MTY5MzQ5MzE5Nn0.tA6I4uGm2KzDixFcxNOrgYmc0xD43y8yeUqfTY4eEM4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "//Should be login to test this endpoint",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://translation-w2bq.onrender.com/api/v1/translation/history?page=1&limit=3",
+					"protocol": "https",
+					"host": [
+						"translation-w2bq",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"translation",
+						"history"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
