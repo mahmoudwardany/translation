@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TranslationController } from './controller/translation.controller';
 import { TranslationsService } from './services/translation.service';

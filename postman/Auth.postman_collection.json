@@ -37,7 +37,13 @@
 					]
 				}
 			},
-			"response": []
+			"response": 
+				{
+					"username":"mahmoud",
+					"email":"mahmoudwardany18@gmail.com",
+					"password": "$2b$10$.RJ.FcKQN7Ol/XgPDNS3CexWobsVEu0LfGxncYMjPbCYe8zZxtRcq",
+                    "id": 2
+				}
 		},
 		{
 			"name": "Login",
@@ -56,7 +62,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"email\":\"mahmoudwardany18@gmail.com\",\r\n\"password\":\"mo151294om\"\r\n}",
+					"raw": "{\r\n\"email\":\"mahmoudwardany18@gmail.com\",\r\n\"password\":\"backend\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -79,7 +85,14 @@
 					]
 				}
 			},
-			"response": []
+			"response": {
+				"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1haG1vdWQiLCJlbWFpbCI6Im1haG1vdWR3YXJkYW55MThAZ21haWwuY29tIiwiaWQiOjIsImlhdCI6MTY5MzU3NjY4MX0.Jz3M9cdTwldLxMxAxDxwfbVDW8nHXtNXVVN9XXLrkWQ",
+				"user": {
+					"id": 2,
+					"username": "mahmoud",
+					"email": "mahmoudwardany18@gmail.com"
+				}
+			}
 		},
 		{
 			"name": "Reset password",
@@ -111,7 +124,9 @@
 					]
 				}
 			},
-			"response": []
+			"response":{
+				"message": "check your email to reset password"
+			}
 		},
 		{
 			"name": "New Password",
@@ -144,7 +159,7 @@
 					]
 				}
 			},
-			"response": []
+			"response": {"message":"Password Update Successfully"}
 		}
 	]
 }

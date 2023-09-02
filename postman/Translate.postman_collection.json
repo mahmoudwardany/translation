@@ -42,7 +42,7 @@
 					},
 					{
 						"key": "X-RapidAPI-Key",
-						"value": "075a39ce8emshcd71328530f7612p18cbe3jsna71da3fc7f9f",
+						"value": "",
 						"type": "text",
 						"disabled": true
 					},
@@ -54,7 +54,7 @@
 					},
 					{
 						"key": "X-RapidAPI-Key",
-						"value": "075a39ce8emshcd71328530f7612p18cbe3jsna71da3fc7f9f",
+						"value": "",
 						"type": "text",
 						"disabled": true
 					},
@@ -89,7 +89,9 @@
 					]
 				}
 			},
-			"response": []
+			"response": {
+				"translatedText":"اهلا"
+			}
 		},
 		{
 			"name": "Get history",
@@ -144,7 +146,35 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"id": 104,
+					"text": "hi",
+					"translation": "أهلاً",
+					"sourceLanguage": "en",
+					"targetLanguage": "ar",
+					"engine": "Google",
+					"userId": 2
+				},
+				{
+					"id": 103,
+					"text": "hi",
+					"translation": "أهلاً",
+					"sourceLanguage": "en",
+					"targetLanguage": "ar",
+					"engine": "Google",
+					"userId": 2
+				},
+				{
+					"id": 102,
+					"text": "hi",
+					"translation": "أهلاً",
+					"sourceLanguage": "en",
+					"targetLanguage": "ar",
+					"engine": "Google",
+					"userId": 2
+				}
+			]
 		}
 	]
 }

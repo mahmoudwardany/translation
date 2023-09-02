@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserController } from './user.controller';
+import { UserController } from './controller/user.controller';
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { getRepositoryToken } from '@nestjs/typeorm'; 
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt'; 
 import { ConfigService } from '@nestjs/config';
-import { UserService } from '../service/user.service';
-import { SignupDto } from '../dto/signup.dto';
-import { LoginUserDto } from '../dto/login-user.dto';
-import { UserEntity } from '../entities/user.entity';
+import { UserService } from './service/user.service';
+import { SignupDto } from './dto/signup.dto';
+import { LoginUserDto } from './dto/login-user.dto';
+import { UserEntity } from './entities/user.entity';
 import { Request } from 'express';
 
 describe('UserController', () => {

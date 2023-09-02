@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   ConflictException,
   Injectable,
@@ -21,7 +22,7 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private JwtService: JwtService,
+    private jwtService: JwtService,
     private readonly configService: ConfigService,
   ) {}
   //Register
@@ -30,7 +31,9 @@ export class UserService {
     if (user) throw new ConflictException('Email Already exists');
     body.password = await this.hashPassword(body.password);
     const newUser = this.userRepository.create(body);
-    return await this.userRepository.save(newUser);
+    const saveUser=await this.userRepository.save(newUser)
+    delete saveUser.resetToken;
+    return saveUser ;
   }
 
   //Login
@@ -49,7 +52,7 @@ export class UserService {
       id: user.id,
     };
     const secret = this.configService.get<string>('JWT_SECRET');
-    const accessToken = this.JwtService.sign(payload, { secret });
+    const accessToken = this.jwtService.sign(payload, { secret });
     return { accessToken, user };
   }
 
@@ -57,7 +60,7 @@ export class UserService {
   async requestResetPassword(email: string, link: string) {
     const user = await this.findUserByEmail(email);
     if (!user) {
-      throw new NotFoundException('email not found');
+      throw new NotFoundException('Email not found');
     }
     const resetToken = uuidv4();
     user.resetToken = resetToken;
