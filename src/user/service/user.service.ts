@@ -79,6 +79,21 @@ export class UserService {
     user.resetToken = null;
     await this.userRepository.save(user);
   }
+  async updateProfilePhoto(  userId: number,
+    profilePhotoUrl: string,
+    profilePhotoPublicId: string
+    ): Promise<void> {
+    const user = await this.userRepository.findOneBy({id:userId});
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+    await this.userRepository.update(userId, {
+      profilePhotoUrl,
+      profilePhotoPublicId,
+    });
+
+  }
   //helpers
   async findUserByEmail(email: string) {
     return await this.userRepository.findOneBy({ email });
@@ -93,8 +108,5 @@ export class UserService {
   }
   async comparePassword(password: string, userPassword: string) {
     return await compare(password, userPassword);
-  }
-  async findUserByResetToken(token: string) {
-    return this.userRepository.findOneBy({ resetToken: token });
   }
 }

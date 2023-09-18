@@ -47,7 +47,7 @@ describe('UserController', () => {
         username: 'test',
         email: 'test@example.com',
         password: 'password123',
-      };
+      };//نعرف المدخلات
         const mockUser: UserEntity = {
         id: 1,
         username: 'test',
@@ -56,35 +56,48 @@ describe('UserController', () => {
         translations: [], 
         resetToken: null, 
       };
-      jest.spyOn(userService, 'signup').mockResolvedValue(mockUser);
+   const signUpSpy=   jest.spyOn(userService, 'signup').mockResolvedValue(mockUser);
       const result = await userController.register(signupDto);
-      expect(userService.signup).toHaveBeenCalledWith(signupDto);
+      console.log(result)
+      expect(signUpSpy).toHaveBeenCalledWith(signupDto)
       expect(result).toEqual(mockUser);
+    });
+    it('should throw ConflictException if signUp throws ConflictException', async () => {
+      const signupDto: SignupDto = {
+        username:"test",
+        email: 'test@example.com',
+        password: 'incorrectPassword',
+      };
+      const conflictException = new ConflictException('Email Already exists');
+      jest.spyOn(userService, 'signup').mockRejectedValue(conflictException);
+      await expect(userController.register(signupDto)).rejects.toThrow(conflictException);
     });
   });
   describe('login', () => {
     it('should call userService.signIn and return the result', async () => {
-      const loginUserDto: LoginUserDto = {
-        email: 'test@example.com',
-        password: 'password123',
-      };
-      const expectedAccessToken = 'mockedAccessToken';
-      const expectedUser: UserEntity = {
-        id: 1,
-        email: 'test@example.com',
-        username: 'testUsername',
-        password: 'mockedPassword',
-        translations: [], 
-        resetToken: null, 
-      };
-      const mockSignInResult = {
-        accessToken: expectedAccessToken,
-        user: expectedUser,
-      };
-      jest.spyOn(userService, 'signIn').mockResolvedValue(mockSignInResult)
-      const result = await userController.login(loginUserDto);
-      expect(userService.signIn).toHaveBeenCalledWith(loginUserDto);
-      expect(result).toEqual(mockSignInResult);
+const loginDto:LoginUserDto={
+  email:'test@exmaple.com',
+  password:"comapred password"
+}
+const expectedAccessToken = 'mockedToken'
+const expectedUser = {
+  id: 1,
+  email: 'test@example.com',
+  username: 'testUsername',
+  password: 'mockedPassword',
+  translations: [], 
+  resetToken: null, 
+};
+const mockSignInResult = {
+  accessToken: expectedAccessToken,
+  user: expectedUser,
+};
+const signInSpy = jest
+.spyOn(userService, 'signIn')
+.mockResolvedValue(mockSignInResult);
+const result = await userController.login(loginDto)
+expect(result).toEqual(mockSignInResult)
+expect(signInSpy).toHaveBeenCalledWith(loginDto)
     });
 
     it('should throw ConflictException if signIn throws ConflictException', async () => {
@@ -102,19 +115,15 @@ describe('UserController', () => {
       const email = 'test@example.com';
       const link = 'http://localhost/api/v1/user/reset-password';
       const expectedResult = { message: 'check your email to reset password' };
-
       const mockRequest = {
         headers: {
           'x-forwarded-proto': 'http',
           'host': 'localhost',
         },
       } as unknown as Request;
-
-      jest.spyOn(userService, 'requestResetPassword').mockResolvedValue();
-
+    const requestMock =   jest.spyOn(userService, 'requestResetPassword').mockResolvedValue();
       const result = await userController.sendResetPasswordEmail(email, mockRequest as any);
-
-      expect(userService.requestResetPassword).toHaveBeenCalledWith(email, link);
+      expect(requestMock).toHaveBeenCalledWith(email, link);
       expect(result).toEqual(expectedResult);
     });
 
@@ -130,32 +139,26 @@ describe('UserController', () => {
       } as unknown as Request;
 
       jest.spyOn(userService, 'requestResetPassword').mockRejectedValue(notFoundException);
-
       await expect(userController.sendResetPasswordEmail(email, mockRequest as any)).rejects.toThrow(
         notFoundException,
       );
     });
   });
-
   describe('updatePassword', () => {
     it('should call userService.updatePassword and return the result', async () => {
       const token = 'mockedToken';
       const newPassword = 'newPassword123';
       const expectedResult = { message: 'Password Update Successfully' };
-      jest.spyOn(userService, 'updatePassword').mockResolvedValue();
-
+     const mockUpadate = jest.spyOn(userService, 'updatePassword').mockResolvedValue();
       const result = await userController.updatePassword(token, newPassword);
-
-      expect(userService.updatePassword).toHaveBeenCalledWith(token, newPassword);
+      expect(mockUpadate).toHaveBeenCalledWith(token, newPassword);
       expect(result).toEqual(expectedResult);
     });
-
     it('should throw NotFoundException if userService.updatePassword throws NotFoundException', async () => {
       const token = 'mockedToken';
       const newPassword = 'newPassword123';
       const notFoundException = new NotFoundException('Invalid Token');
       jest.spyOn(userService, 'updatePassword').mockRejectedValue(notFoundException);
-
       await expect(userController.updatePassword(token, newPassword)).rejects.toThrow(notFoundException);
     });
   });

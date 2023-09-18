@@ -55,9 +55,9 @@ export class TranslationsService {
     if (microsoftTranslatedText !== 'Translation failed') {
       return microsoftTranslatedText;
     }
-
     return 'Translation failed';
   }
+  
 
   private async translateWithProvider(
     apiUrl: string,
@@ -98,13 +98,11 @@ export class TranslationsService {
           engine,
         );
       }
-
       return translation;
     } catch (error) {
       return 'Translation failed';
     }
   }
-
   async saveTranslation(
     userId: number,
     text: string,
@@ -121,7 +119,6 @@ export class TranslationsService {
       targetLanguage,
       engine,
     });
-
     try {
       await this.translationRepository.save(newTranslation);
     } catch (error) {
@@ -135,7 +132,6 @@ export class TranslationsService {
     limit: number,
   ): Promise<TranslationEntity[]> {
     const skip = (page - 1) * limit;
-
     return this.translationRepository
       .createQueryBuilder('translation')
       .where('translation.user.id = :userId', { userId })
