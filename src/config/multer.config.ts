@@ -1,16 +1,20 @@
 /* eslint-disable prettier/prettier */
-// multer.config.ts
-import { diskStorage } from 'multer';
-import { extname } from 'path';
-export const multerConfig = {
-  storage: diskStorage({
-    destination: '../images', // Set your desired upload folder
-    filename: (req, file, callback) => {
-      const randomName = Array(32)
-        .fill(null)
-        .map(() => Math.round(Math.random() * 16).toString(16))
-        .join('');
-      callback(null, `${randomName}${extname(file.originalname)}`);
-    },
-  }),
+import { MulterModuleOptions } from '@nestjs/platform-express';
+import { Request } from 'express';
+
+
+export const multerConfig: MulterModuleOptions = {
+  dest: './images', 
+  storage: undefined, 
+  fileFilter: (req: Request, file: Express.Multer.File, callback: (error: Error | null, acceptFile: boolean) => void) => {
+    // Define a file filter to accept or reject files based on your criteria
+    if (['image/jpeg', 'image/png'].includes(file.mimetype)) {
+      callback(null, true); 
+    } else {
+      callback(new Error('Invalid file type'), false); 
+    }
+  },
+  limits: {
+    fileSize: 1024 * 1024 * 10, 
+  },
 };

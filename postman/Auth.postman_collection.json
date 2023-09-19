@@ -38,11 +38,58 @@
 				}
 			},
 			"response": 
+			{
+				"username":"mahmoud",
+				"email":"mahmoudwardany18@gmail.com",
+				"password": "$2b$10$.RJ.FcKQN7Ol/XgPDNS3CexWobsVEu0LfGxncYMjPbCYe8zZxtRcq",
+				"id": 2
+			}
+			},
+		{
+			"name": "Update ProfilePicture",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1haG1vdWQiLCJlbWFpbCI6Im1haG1vdWR3YXJkYW55NzdAZ21haWwuY29tIiwiaWQiOjMsImlhdCI6MTY5NTA0ODQwMCwiZXhwIjoxNjk1MTM0ODAwfQ.ljvdlAnfUHeWXzczpv5T08f1o8YQP674pRXNzoQMqrE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "profilePhoto",
+							"type": "file",
+							"src": "/C:/Users/DELL/Downloads/profile-pic (5).png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://translation-w2bq.onrender.com/api/v1/user/profile-photo",
+					"protocol": "https",
+					"host": [
+						"translation-w2bq",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"profile-photo"
+					]
+				}
+			},
+			"response": 
 				{
-					"username":"mahmoud",
-					"email":"mahmoudwardany18@gmail.com",
-					"password": "$2b$10$.RJ.FcKQN7Ol/XgPDNS3CexWobsVEu0LfGxncYMjPbCYe8zZxtRcq",
-                    "id": 2
+					"message": "Profile Picture Updated",
+					"PictureUrl": "https://res.cloudinary.com/dtg93afhc/image/upload/v16950518.png"
 				}
 		},
 		{
@@ -62,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"email\":\"mahmoudwardany18@gmail.com\",\r\n\"password\":\"backend\"\r\n}",
+					"raw": "{\r\n\"email\":\"mahmoudwardany77@gmail.com\",\r\n\"password\":\"mo151294om\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -159,7 +206,8 @@
 					]
 				}
 			},
-			"response": {"message":"Password Update Successfully"}
-		}
+			"response":{
+				"message": "check your email to reset password"
+			}		}
 	]
 }

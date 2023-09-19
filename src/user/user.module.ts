@@ -9,7 +9,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from '../util/jwt/jwt-strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
-import { multerConfig } from '../config/multer.config';
+import {multerConfig} from '../config/multer.config';
+
 
 @Module({
   imports: [

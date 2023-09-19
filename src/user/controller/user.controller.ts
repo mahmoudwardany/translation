@@ -4,13 +4,13 @@ import { UserService } from '../service/user.service';
 import { SignupDto } from '../dto/signup.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { multerConfig } from '@app/config/multer.config';
-import { Multer } from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
 import { GetUser } from '@app/util/get-user.decorator';
 import { UserEntity } from '../entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
+import fs from 'fs/promises';
+import {multerConfig} from '../../config/multer.config';
 
 
 
@@ -66,21 +66,28 @@ export class UserController {
   // Upload user profile photo
   @Post('profile-photo')
   @UseGuards(AuthGuard())
-  @UseInterceptors(FileInterceptor('profilePhoto', multerConfig))
-  async uploadProfilePhoto(
+  @UseInterceptors(FileInterceptor('profilePicture', multerConfig))
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
     @GetUser() user: UserEntity,
-    @UploadedFile() file: Multer.File,
   ) {
+    if (!file) {
+      return { message: 'No file uploaded' };
+    }
+    
     const currentPublicId = user.profilePhotoPublicId;
     this.configureCloudinary(); 
 
     const uploadResult = await cloudinary.uploader.upload(file.path);
-
     const newCloudinaryUrl = uploadResult.secure_url;
     const newPublicId = uploadResult.public_id;
 
     await this.userService.updateProfilePhoto(user.id, newCloudinaryUrl, newPublicId);
-
+ try{
+  await fs.unlink(file.path); 
+} catch (error) {
+  console.error('Error deleting local file:', error);
+}
     if (currentPublicId) {
       await cloudinary.uploader.destroy(currentPublicId);
     }
