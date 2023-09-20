@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { TranslationModule } from './translation/translation.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmCOnfig } from './config/db.config';
 import { HttpModule } from '@nestjs/axios'; 
 import { ThrottlerModule } from '@nestjs/throttler';
+import { CompressionMiddleware } from './util/compression.middleware';
 @Module({
   imports: [
     UserModule,
@@ -18,4 +19,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
     }),
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CompressionMiddleware).forRoutes('*');
+  }
+}
