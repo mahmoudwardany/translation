@@ -4,7 +4,7 @@ import { Request } from 'express';
 
 
 export const multerConfig: MulterModuleOptions = {
-  dest: './images', 
+  dest: '../images', 
   storage: undefined, 
   fileFilter: (req: Request, file: Express.Multer.File, callback: (error: Error | null, acceptFile: boolean) => void) => {
     // Define a file filter to accept or reject files based on your criteria

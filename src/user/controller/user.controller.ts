@@ -9,7 +9,6 @@ import { GetUser } from '@app/util/get-user.decorator';
 import { UserEntity } from '../entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
-import fs from 'fs/promises';
 import {multerConfig} from '../../config/multer.config';
 
 
@@ -83,11 +82,7 @@ export class UserController {
     const newPublicId = uploadResult.public_id;
 
     await this.userService.updateProfilePhoto(user.id, newCloudinaryUrl, newPublicId);
- try{
-  await fs.unlink(file.path); 
-} catch (error) {
-  console.error('Error deleting local file:', error);
-}
+
     if (currentPublicId) {
       await cloudinary.uploader.destroy(currentPublicId);
     }
